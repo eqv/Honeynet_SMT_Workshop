@@ -1,6 +1,6 @@
 We are interested in some strange behaviour regarding integer overflows.
 Assume you want to find out if there is an 64 bit integer 
-`x < 0` such that `x * 133713378 == 1337`.
+`x < 0` such that `x * 133713378 == 13372`.
 
 
 __Adapt the the following program (`task_2.py`) to answer your question:__
