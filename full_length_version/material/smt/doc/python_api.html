@@ -1,0 +1,792 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Boolector Python API documentation — Boolector 2.2 documentation</title>
+    
+    <link rel="stylesheet" href="python_api_files/sphinxdoc.css" type="text/css">
+    <link rel="stylesheet" href="python_api_files/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="python_api_files/jquery.js"></script>
+    <script type="text/javascript" src="python_api_files/underscore.js"></script>
+    <script type="text/javascript" src="python_api_files/doctools.js"></script>
+    <link rel="top" title="Boolector 2.2 documentation" href="http://fmv.jku.at/boolector/doc/index.html">
+    <link rel="next" title="Module Index: boolector" href="http://fmv.jku.at/boolector/doc/boolector.html">
+    <link rel="prev" title="C Interface" href="http://fmv.jku.at/boolector/doc/cboolector_index.html"> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="http://fmv.jku.at/boolector/doc/genindex.html" title="General Index" accesskey="I">index</a></li>
+        <li class="right">
+          <a href="http://fmv.jku.at/boolector/doc/boolector.html" title="Module Index: boolector" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="http://fmv.jku.at/boolector/doc/cboolector_index.html" title="C Interface" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="http://fmv.jku.at/boolector/doc/index.html">Boolector 2.2 documentation</a> »</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="http://fmv.jku.at/boolector/doc/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Boolector Python API documentation</a><ul>
+<li><a class="reference internal" href="#interface">Interface</a></li>
+<li><a class="reference internal" href="#quickstart">Quickstart</a><ul>
+<li><a class="reference internal" href="#python-operator-overloading">Python Operator Overloading</a></li>
+<li><a class="reference internal" href="#automatic-constant-conversion">Automatic Constant Conversion</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#options">Options</a><ul>
+<li><a class="reference internal" href="#api-tracing">API Tracing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#internals">Internals</a><ul>
+<li><a class="reference internal" href="#operators">Operators</a></li>
+<li><a class="reference internal" href="#rewriting">Rewriting</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="http://fmv.jku.at/boolector/doc/cboolector_index.html" title="previous chapter">C Interface</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="http://fmv.jku.at/boolector/doc/boolector.html" title="next chapter">Module Index: boolector</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input name="q" type="text">
+      <input value="Go" type="submit">
+      <input name="check_keywords" value="yes" type="hidden">
+      <input name="area" value="default" type="hidden">
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="boolector-python-api-documentation">
+<h1>Boolector Python API documentation<a class="headerlink" href="#boolector-python-api-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html">Python interface</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="quickstart">
+<h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>First, create a Boolector instance:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">btor</span> <span class="o">=</span> <span class="n">Boolector</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>You can configure this instance via <a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Set_opt" title="boolector.Boolector.Set_opt"><code class="xref py py-func docutils literal"><span class="pre">Set_opt()</span></code></a>.
+E.g., if you want to enable model generation:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">btor</span><span class="o">.</span><span class="n">Set_opt</span><span class="p">(</span><span class="s">"model_gen"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For a detailed description of all configurable options, see
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Set_opt" title="boolector.Boolector.Set_opt"><code class="xref py py-func docutils literal"><span class="pre">Set_opt()</span></code></a>.</p>
+<p>Next you can either parse an input file, and/or generate expressions to
+be either asserted via <code class="xref py py-func docutils literal"><span class="pre">Aassert()</span></code>, or,
+if incremental usage is enabled,
+assumed via <a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Assume" title="boolector.Boolector.Assume"><code class="xref py py-func docutils literal"><span class="pre">Assume()</span></code></a> (analogously to MiniSAT).
+Note that Boolector’s internal design is motivated by hardware design,
+hence we do not distinguish between type ‘Boolean’ and type ‘bit vector
+of length 1’.</p>
+<p>E.g., if you want to parse an input file “example.btor”,
+use <a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Parse" title="boolector.Boolector.Parse"><code class="xref py py-func docutils literal"><span class="pre">Parse()</span></code></a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">error_msg</span><span class="p">)</span> <span class="o">=</span> <span class="n">btor</span><span class="o">.</span><span class="n">Parse</span><span class="p">(</span><span class="s">"example.btor"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Incremental usage is not enabled, hence, if the parser does not encounter
+an error, it returns <code class="xref py py-data docutils literal"><span class="pre">UNKNOWN</span></code>
+(for a more detailed description of the parsers return values,
+see <a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Parse" title="boolector.Boolector.Parse"><code class="xref py py-func docutils literal"><span class="pre">Parse()</span></code></a>).
+However, if the parser encounters an error, it returns
+<code class="xref py py-data docutils literal"><span class="pre">PARSE_ERROR</span></code>, and an explanation of that error is
+stored in <code class="docutils literal"><span class="pre">error_msg</span></code>. If the input file specifies a (known) status
+of the input formula (either satisfiable or unsatisfiable), that status
+is stored in <code class="docutils literal"><span class="pre">status</span></code>.</p>
+<p>As an example for generating and asserting expressions via
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Assert" title="boolector.Boolector.Assert"><code class="xref py py-func docutils literal"><span class="pre">Assert()</span></code></a>, consider the following example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="mi">0</span> <span class="o">&lt;</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">100</span>
+</pre></div>
+</div>
+<p>Given the Boolector instance created above, we generate and assert
+the following expressions:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">x</span> <span class="o">=</span> <span class="n">btor</span><span class="o">.</span><span class="n">Var</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s">"x"</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">btor</span><span class="o">.</span><span class="n">Var</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s">"y"</span><span class="p">)</span>
+
+<span class="n">btor</span><span class="o">.</span><span class="n">Assert</span><span class="p">(</span><span class="mi">0</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">btor</span><span class="o">.</span><span class="n">Assert</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">btor</span><span class="o">.</span><span class="n">Assert</span><span class="p">(</span><span class="mi">0</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">btor</span><span class="o">.</span><span class="n">Assert</span><span class="p">(</span><span class="n">y</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">btor</span><span class="o">.</span><span class="n">Assert</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">umulo</span> <span class="o">=</span> <span class="n">btor</span><span class="o">.</span><span class="n">Umulo</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>  <span class="c"># overflow bit of x * y</span>
+<span class="n">btor</span><span class="o">.</span><span class="n">Assert</span><span class="p">(</span><span class="o">~</span><span class="n">umulo</span><span class="p">)</span>       <span class="c"># do not allow overflows</span>
+</pre></div>
+</div>
+<p>After parsing an input file and/or asserting/assuming expressions,
+the satisfiability of the resulting formula can be determined via
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Sat" title="boolector.Boolector.Sat"><code class="xref py py-func docutils literal"><span class="pre">Sat()</span></code></a>.
+If the resulting formula is satisfiable and model generation has been
+enabled via <a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Set_opt" title="boolector.Boolector.Set_opt"><code class="xref py py-func docutils literal"><span class="pre">Set_opt()</span></code></a>, you can either
+print the resulting model via <a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Print_model" title="boolector.Boolector.Print_model"><code class="xref py py-func docutils literal"><span class="pre">Print_model()</span></code></a>,
+or query assignments
+of bit vector and array variables or uninterpreted functions via
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.BoolectorNode.assignment" title="boolector.BoolectorNode.assignment"><code class="xref py py-data docutils literal"><span class="pre">assignment</span></code></a>.
+Note that querying assignments is not limited to variables—you can query
+the assignment of any arbitrary expression.</p>
+<p>E.g., given the example above, we first determine if the formula is
+satisfiable via <a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Sat" title="boolector.Boolector.Sat"><code class="xref py py-func docutils literal"><span class="pre">Sat()</span></code></a> (which it is):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">result</span> <span class="o">=</span> <span class="n">btor</span><span class="o">.</span><span class="n">Sat</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Now you can either query the assignments of variables <code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">assignment</span><span class="p">)</span>  <span class="c"># prints: 00000100</span>
+<span class="k">print</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">assignment</span><span class="p">)</span>  <span class="c"># prints: 00010101</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"{} {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">assignment</span><span class="p">))</span>  <span class="c"># prints: x 00000100</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"{} {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">assignment</span><span class="p">))</span>  <span class="c"># prints: y 00010101</span>
+</pre></div>
+</div>
+<p>or print the resulting model via <a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Print_model" title="boolector.Boolector.Print_model"><code class="xref py py-func docutils literal"><span class="pre">Print_model()</span></code></a>.
+Boolector supports printing models in its own format (“btor”, the default)
+or in <a class="reference external" href="http://smtlib.cs.uiowa.edu/papers/smt-lib-reference-v2.0-r12.09.09.pdf">SMT-LIB v2</a> format (“smt2”):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">btor</span><span class="o">.</span><span class="n">Print_model</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>A possible model would be:</p>
+<div class="highlight-python"><div class="highlight"><pre>2 00000100 x
+3 00010101 y
+</pre></div>
+</div>
+<p>which in this case indicates the assignments of bit vector variables
+<code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code>. Note that the first column indicates the id of an input,
+the second column its assignment, and the third column its name (or symbol)
+if any.
+In the case that the formula includes arrays as input, their values at a
+certain index are indicated as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre>4[00] 01 A
+</pre></div>
+</div>
+<p>where A has id 4 and is an array with index and element bit width of 2,
+and its value at index 0 is 1.</p>
+<p>Printing the above model in <a class="reference external" href="http://smtlib.cs.uiowa.edu/papers/smt-lib-reference-v2.0-r12.09.09.pdf">SMT-LIB v2</a> format:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">btor</span><span class="o">.</span><span class="n">print_model</span> <span class="p">(</span><span class="n">format</span><span class="o">=</span><span class="s">"smt2"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A possible model would be:</p>
+<div class="highlight-python"><div class="highlight"><pre>(model
+  (define-fun x () (_ BitVec 8) #b00000100)
+  (define-fun y () (_ BitVec 8) #b00010101)
+  (define-fun y (
+   (y_x0 (_ BitVec 2)))
+   (ite (= y_x0 #b00) #b01
+     #00))
+)
+</pre></div>
+</div>
+</div></blockquote>
+<div class="section" id="python-operator-overloading">
+<span id="operator-overloading"></span><h3>Python Operator Overloading<a class="headerlink" href="#python-operator-overloading" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>For convenience the Boolector Python API provides the following overloaded
+operators on bit vectors (<a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.BoolectorBVNode" title="boolector.BoolectorBVNode"><code class="xref py py-class docutils literal"><span class="pre">BoolectorBVNode</span></code></a>):</p>
+<p><strong>Arithmetic operators:</strong> <code class="docutils literal"><span class="pre">+</span> <span class="pre">-</span> <span class="pre">*</span> <span class="pre">/</span> <span class="pre">%</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">x</span> <span class="o">=</span> <span class="n">btor</span><span class="o">.</span><span class="n">Var</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">btor</span><span class="o">.</span><span class="n">Var</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+
+<span class="n">bvadd</span>  <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>  <span class="c"># btor.Add(x, y)</span>
+<span class="n">bvsub</span>  <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span>  <span class="c"># btor.Sub(x, y)</span>
+<span class="n">bvmul</span>  <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>  <span class="c"># btor.Mul(x, y)</span>
+<span class="n">bvudiv</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span>  <span class="c"># btor.Udiv(x, y)</span>
+<span class="n">bvurem</span> <span class="o">=</span> <span class="n">x</span> <span class="o">%</span> <span class="n">y</span>  <span class="c"># btor.Urem(x, y)</span>
+<span class="n">bvneg</span>  <span class="o">=</span> <span class="o">-</span><span class="n">x</span>     <span class="c"># btor.Neg(x)</span>
+</pre></div>
+</div>
+<p><strong>Bitwise operators:</strong> <code class="docutils literal"><span class="pre">~</span> <span class="pre">&amp;</span> <span class="pre">|</span> <span class="pre">^</span> <span class="pre">&lt;&lt;</span> <span class="pre">&gt;&gt;</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">z</span> <span class="o">=</span> <span class="n">btor</span><span class="o">.</span><span class="n">Var</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">bvnot</span> <span class="o">=</span> <span class="o">~</span><span class="n">x</span>      <span class="c"># btor.Not(x)</span>
+<span class="n">bvand</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&amp;</span> <span class="n">y</span>   <span class="c"># btor.And(x, y)</span>
+<span class="n">bvor</span>  <span class="o">=</span> <span class="n">x</span> <span class="o">|</span> <span class="n">y</span>   <span class="c"># btor.Or(x, y)</span>
+<span class="n">bvxor</span> <span class="o">=</span> <span class="n">x</span> <span class="o">^</span> <span class="n">y</span>   <span class="c"># btor.Xor(x, y)</span>
+<span class="n">bvshl</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">z</span>  <span class="c"># btor.Sll(x, z)</span>
+<span class="n">bvshr</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="n">z</span>  <span class="c"># btor.Srl(x, z)</span>
+</pre></div>
+</div>
+<p><strong>Comparison operators:</strong> <code class="docutils literal"><span class="pre">&lt;</span> <span class="pre">&lt;=</span> <span class="pre">==</span> <span class="pre">!=</span> <span class="pre">&gt;=</span> <span class="pre">&gt;</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">lt</span>   <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span>   <span class="c"># btor.Ult(x, y)</span>
+<span class="n">lte</span>  <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">y</span>  <span class="c"># btor.Ulte(x, y)</span>
+<span class="n">eq</span>   <span class="o">=</span> <span class="n">x</span> <span class="o">==</span> <span class="n">y</span>  <span class="c"># btor.Eq(x, y)</span>
+<span class="n">ne</span>   <span class="o">=</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">y</span>  <span class="c"># btor.Ne(x, y)</span>
+<span class="n">ugte</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="n">y</span>  <span class="c"># btor.Ugte(x, y)</span>
+<span class="n">ugt</span>  <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">y</span>   <span class="c"># btor.Ugt(x, y)</span>
+</pre></div>
+</div>
+<p><strong>Python slices:</strong>
+It is possible to use Python slices on bit vectors (see
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Slice" title="boolector.Boolector.Slice"><code class="xref py py-func docutils literal"><span class="pre">Slice()</span></code></a>), e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">slice_5_2</span>  <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>  <span class="c"># btor.Slice(x, 5, 2)</span>
+<span class="n">slice_5_0</span>  <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">5</span><span class="p">:]</span>   <span class="c"># btor.Slice(x, 5, 0)</span>
+<span class="n">slice_31_5</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>   <span class="c"># btor.Slice(x, x.width - 1, 5)</span>
+<span class="n">slice_31_0</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:]</span>    <span class="c"># btor.Slice(x, x.width - 1, 0) -- copies variable 'x'</span>
+</pre></div>
+</div>
+<p>Further, the API also provides convenient ways to create reads
+(see <a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Read" title="boolector.Boolector.Read"><code class="xref py py-func docutils literal"><span class="pre">Read()</span></code></a>) on arrays, and function applications
+(see <a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Apply" title="boolector.Boolector.Apply"><code class="xref py py-func docutils literal"><span class="pre">Apply()</span></code></a>).</p>
+<p><strong>Reads on arrays:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">a</span> <span class="o">=</span> <span class="n">btor</span><span class="o">.</span><span class="n">Array</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+
+<span class="n">read</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>  <span class="c"># btor.Read(a, x)</span>
+</pre></div>
+</div>
+<p><strong>Function applications:</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">bv8</span> <span class="o">=</span> <span class="n">btor</span><span class="o">.</span><span class="n">BitVecSort</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">bv32</span> <span class="o">=</span> <span class="n">btor</span><span class="o">.</span><span class="n">BitVecSort</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">btor</span><span class="o">.</span><span class="n">UF</span><span class="p">(</span><span class="n">btor</span><span class="o">.</span><span class="n">FunSort</span><span class="p">([</span><span class="n">bv32</span><span class="p">,</span> <span class="n">bv32</span><span class="p">],</span> <span class="n">bv8</span><span class="p">))</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>  <span class="c"># btor.Apply([x, y], f)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="automatic-constant-conversion">
+<span id="const-conversion"></span><h3>Automatic Constant Conversion<a class="headerlink" href="#automatic-constant-conversion" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>For almost every method of <a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector" title="boolector.Boolector"><code class="xref py py-class docutils literal"><span class="pre">Boolector</span></code></a> that creates nodes,
+instead of passing arguments of the type <a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.BoolectorNode" title="boolector.BoolectorNode"><code class="xref py py-class docutils literal"><span class="pre">BoolectorNode</span></code></a>,
+the Python API allows to pass constants as arguments.
+The only requirement is that it must be possible to derive the bit width of
+the constant operands from the remaining operands.
+For example, binary operators like <a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Add" title="boolector.Boolector.Add"><code class="xref py py-func docutils literal"><span class="pre">Add()</span></code></a>
+operands may be a constant, and its bit width will be derived from the other
+non-constant operand, e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">btor</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>         <span class="c"># btor.Add(x, btor.Const(42, x.width))</span>
+<span class="n">btor</span><span class="o">.</span><span class="n">And</span><span class="p">(</span><span class="mh">0x2a</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>       <span class="c"># btor.And(btor.Const(0x2a, x.width), x)</span>
+<span class="n">btor</span><span class="o">.</span><span class="n">Udiv</span><span class="p">(</span><span class="mb">0b101010</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>  <span class="c"># btor.Udiv(btor.Const(0b101010, x.width), x)</span>
+</pre></div>
+</div>
+<p>For all shift operations it is possible to define the shift width as
+constant, e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">btor</span><span class="o">.</span><span class="n">Sll</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  <span class="c"># btor.Sll(x, btor.Const(5, math.ceil(math.log(x.width, 2))))</span>
+<span class="n">btor</span><span class="o">.</span><span class="n">Ror</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  <span class="c"># btor.Ror(x, btor.Const(5, math.ceil(math.log(x.width, 2))))</span>
+</pre></div>
+</div>
+<p>For operations on arrays all arguments may be constant (except the array
+itself) since the bit width of the operands can be derived from the array,
+e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">btor</span><span class="o">.</span><span class="n">Read</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>       <span class="c"># btor.Read(a, btor.Const(42, a.index_with))</span>
+<span class="n">btor</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>  <span class="c"># btor.Write(a, btor.Const(42, a.index_width), btor.Const(10, a.width))</span>
+</pre></div>
+</div>
+<p>This also applies to the arguments of function applications, which can be
+derived from the function’s signature, e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">btor</span><span class="o">.</span><span class="n">Apply</span><span class="p">([</span><span class="mi">42</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="n">f</span><span class="p">)</span>  <span class="c"># btor.Apply([btor.Const(42, ...), btor.Const(10, ...)], f)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Automatic constant conversion is not possible for the following operators:
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Not" title="boolector.Boolector.Not"><code class="xref py py-func docutils literal"><span class="pre">Not()</span></code></a>,
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Neg" title="boolector.Boolector.Neg"><code class="xref py py-func docutils literal"><span class="pre">Neg()</span></code></a>,
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Redor" title="boolector.Boolector.Redor"><code class="xref py py-func docutils literal"><span class="pre">Redor()</span></code></a>,
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Redxor" title="boolector.Boolector.Redxor"><code class="xref py py-func docutils literal"><span class="pre">Redxor()</span></code></a>,
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Redand" title="boolector.Boolector.Redand"><code class="xref py py-func docutils literal"><span class="pre">Redand()</span></code></a>,
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Slice" title="boolector.Boolector.Slice"><code class="xref py py-func docutils literal"><span class="pre">Slice()</span></code></a>,
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Uext" title="boolector.Boolector.Uext"><code class="xref py py-func docutils literal"><span class="pre">Uext()</span></code></a>,
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Sext" title="boolector.Boolector.Sext"><code class="xref py py-func docutils literal"><span class="pre">Sext()</span></code></a>,
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Inc" title="boolector.Boolector.Inc"><code class="xref py py-func docutils literal"><span class="pre">Inc()</span></code></a>,
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Dec" title="boolector.Boolector.Dec"><code class="xref py py-func docutils literal"><span class="pre">Dec()</span></code></a>, and
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Concat" title="boolector.Boolector.Concat"><code class="xref py py-func docutils literal"><span class="pre">Concat()</span></code></a>
+as the bit with of the resulting node cannot be determined.</p>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Boolector can be configured either via <a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Set_opt" title="boolector.Boolector.Set_opt"><code class="xref py py-func docutils literal"><span class="pre">Set_opt()</span></code></a>,
+or via environment variables of the form:</p>
+<div class="highlight-python"><div class="highlight"><pre>BTOR&lt;capitalized option name without '_'&gt;=&lt;value&gt;
+</pre></div>
+</div>
+<p>For a list and detailed descriptions of all available options,
+see <a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Set_opt" title="boolector.Boolector.Set_opt"><code class="xref py py-func docutils literal"><span class="pre">Set_opt()</span></code></a>.</p>
+<p>E.g., given a Boolector instance <code class="docutils literal"><span class="pre">btor</span></code>, model generation is enabled either
+via</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">btor</span><span class="o">.</span><span class="n">Set_opt</span><span class="p">(</span><span class="s">"model_gen"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or via setting the environment variable</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">BTORMODELGEN</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="section" id="api-tracing">
+<h3>API Tracing<a class="headerlink" href="#api-tracing" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>API tracing allows to record every call to Boolector’s public API. The
+resulting trace can be replayed and the replayed sequence behaves exactly
+like the original Boolector run.
+This is particularly useful for debugging purposes, as it enables replaying
+erroneous behaviour.
+API tracing can be enabled either via
+setting the environment variable BTORAPITRACE=&lt;filename&gt;.</p>
+<p>E.g., given a Boolector instance ‘btor’, enabling API tracing is done as
+follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">BTORAPITRACE</span><span class="o">=</span><span class="s">"error.trace"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="internals">
+<h2>Internals<a class="headerlink" href="#internals" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Boolector internally maintains a directed acyclic graph (DAG) of
+expressions.
+By asserting an expression, it will be permanently added to the
+formula.
+Assumptions, in contrast, are cleared after a call to
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Sat" title="boolector.Boolector.Sat"><code class="xref py py-func docutils literal"><span class="pre">Sat()</span></code></a>.
+You can query assumptions that force a formula to be unsatisfiable
+via <a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Failed" title="boolector.Boolector.Failed"><code class="xref py py-func docutils literal"><span class="pre">Failed()</span></code></a>.</div></blockquote>
+<div class="section" id="operators">
+<h3>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>Boolector internally describes expressions by means of a set of base
+operators as documented in <a class="reference external" href="http://fmv.jku.at/papers/BrummayerBiereLonsing-BPR08.pdf">BTOR</a>.
+Boolector’s API, however, provides a richer set of operators for
+convenience, where non-base operators are internally rewritten to use
+base operators only.
+E.g., two’s complement (<a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Neg" title="boolector.Boolector.Neg"><code class="xref py py-func docutils literal"><span class="pre">Neg()</span></code></a>) is rewritten as
+one’s complement and addition of 1.
+Note that this behaviour is not influenced by the rewrite level chosen.</div></blockquote>
+</div>
+<div class="section" id="rewriting">
+<h3>Rewriting<a class="headerlink" href="#rewriting" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>Boolector simplifies expressions and the expression DAG by means of
+rewriting and supports three so-called rewrite levels.
+Increasing rewrite levels increase the extent of rewriting performed,
+and a rewrite level of 0 is equivalent to disabling rewriting at all.
+Note that Boolector not only simplifies expressions during construction
+of the expression DAG—for each call to ref boolector_sat,
+various simplification techniques and rewriting phases are initiated.
+You can force Boolector to initiate rewriting and simplify the expression
+DAG via <a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Simplify" title="boolector.Boolector.Simplify"><code class="xref py py-func docutils literal"><span class="pre">Simplify()</span></code></a>.
+The rewrite level can be configured via <a class="reference internal" href="http://fmv.jku.at/boolector/doc/boolector.html#boolector.Boolector.Set_opt" title="boolector.Boolector.Set_opt"><code class="xref py py-func docutils literal"><span class="pre">Set_opt()</span></code></a>.</div></blockquote>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">boolector</span> <span class="kn">import</span> <span class="n">Boolector</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">Boolector</span><span class="p">()</span> 
+
+<span class="c">### Creating Boolector nodes</span>
+
+    <span class="c"># Constants</span>
+    <span class="n">_const</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="s">"10010101"</span><span class="p">)</span>
+    <span class="n">_zero</span>  <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+    <span class="n">_ones</span>  <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">129</span><span class="p">)</span>
+    <span class="n">_true</span>  <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">_false</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">_one</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+    <span class="n">_uint</span>  <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="mi">77</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+    <span class="n">_int</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Const</span><span class="p">(</span><span class="o">-</span><span class="mi">77</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+
+    <span class="c"># Variables</span>
+    <span class="n">_var</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Var</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="s">"var_symbol"</span><span class="p">)</span>
+    <span class="n">_param</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="s">"param_symbol"</span><span class="p">)</span>  <span class="c"># used as function parameters</span>
+    <span class="n">_array</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Array</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="s">"array_symbol"</span><span class="p">)</span>
+
+    <span class="c"># One's complement  </span>
+    <span class="n">_not0</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Not</span><span class="p">(</span><span class="n">_const</span><span class="p">)</span>
+    <span class="n">_not1</span>    <span class="o">=</span> <span class="o">~</span><span class="n">_const</span>
+
+    <span class="c"># Two's complement </span>
+    <span class="n">_neg0</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Neg</span><span class="p">(</span><span class="n">_zero</span><span class="p">)</span>
+    <span class="n">_neg1</span>    <span class="o">=</span> <span class="o">-</span><span class="n">_zero</span>
+
+    <span class="c"># Reduction operations on bit vectors</span>
+    <span class="n">_redor</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Redor</span><span class="p">(</span><span class="n">_ones</span><span class="p">)</span>
+    <span class="n">_redxor</span>  <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Redxor</span><span class="p">(</span><span class="n">_one</span><span class="p">)</span>
+    <span class="n">_redand</span>  <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Redand</span><span class="p">(</span><span class="n">_uint</span><span class="p">)</span>
+
+    <span class="c"># Slicing of bit vectors </span>
+    <span class="n">_slice0</span>  <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Slice</span><span class="p">(</span><span class="n">_param</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">_slice1</span>  <span class="o">=</span> <span class="n">_param</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">_slice3</span>  <span class="o">=</span> <span class="n">_param</span><span class="p">[:]</span>   <span class="c"># copy</span>
+    <span class="n">_slice2</span>  <span class="o">=</span> <span class="n">_param</span><span class="p">[</span><span class="mi">8</span><span class="p">:]</span>  <span class="c"># lower is 0</span>
+    <span class="n">_slice4</span>  <span class="o">=</span> <span class="n">_param</span><span class="p">[:</span><span class="mi">0</span><span class="p">]</span>  <span class="c"># upper is _param.width - 1</span>
+    <span class="n">_slice5</span>  <span class="o">=</span> <span class="n">_param</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>   <span class="c"># extract bit at position 8, equiv. to _param[8:8]</span>
+    <span class="n">_slice5</span>  <span class="o">=</span> <span class="n">_param</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span> <span class="c"># equiv. to _param[8]</span>
+
+    <span class="c"># Unsigned/signed extension</span>
+    <span class="n">_uext</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Uext</span><span class="p">(</span><span class="n">_true</span><span class="p">,</span> <span class="mi">127</span><span class="p">)</span>
+    <span class="n">_sext</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Sext</span><span class="p">(</span><span class="n">_false</span><span class="p">,</span> <span class="mi">127</span><span class="p">)</span>
+
+    <span class="n">_inc</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Inc</span><span class="p">(</span><span class="n">_not0</span><span class="p">)</span>
+    <span class="n">_dec</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Dec</span><span class="p">(</span><span class="n">_not1</span><span class="p">)</span>
+    
+    <span class="n">_implies0</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Implies</span><span class="p">(</span><span class="n">_redor</span><span class="p">,</span> <span class="n">_redxor</span><span class="p">)</span> 
+    <span class="n">_implies1</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Implies</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">_redor</span><span class="p">)</span>
+    <span class="n">_implies2</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Implies</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">_redxor</span><span class="p">)</span>
+
+    <span class="n">_iff0</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Iff</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">_redxor</span><span class="p">)</span>
+    <span class="n">_iff1</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Iff</span><span class="p">(</span><span class="n">_redor</span><span class="p">,</span> <span class="n">_redxor</span><span class="p">)</span>
+    <span class="n">_iff2</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Iff</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">_redxor</span><span class="p">)</span>
+
+    <span class="n">_xor0</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Xor</span><span class="p">(</span><span class="n">_uext</span><span class="p">,</span> <span class="n">_sext</span><span class="p">)</span>
+    <span class="n">_xor1</span>     <span class="o">=</span> <span class="n">_uext</span> <span class="o">^</span> <span class="n">_sext</span>
+    <span class="n">_xor2</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Xor</span><span class="p">(</span><span class="mh">0xff</span><span class="p">,</span> <span class="n">_sext</span><span class="p">)</span>
+    <span class="n">_xor3</span>     <span class="o">=</span> <span class="mh">0xff</span> <span class="o">^</span> <span class="n">_sext</span>
+
+    <span class="n">_and0</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">And</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_and1</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">And</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_and2</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">And</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+    <span class="n">_and3</span>     <span class="o">=</span> <span class="n">_dec</span> <span class="o">&amp;</span> <span class="mh">0xaa</span>
+
+    <span class="n">_nand0</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Nand</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_nand1</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Nand</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_nand2</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Nand</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+    <span class="n">_nand3</span>    <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="n">_dec</span> <span class="o">&amp;</span> <span class="mh">0xaa</span><span class="p">)</span> 
+
+    <span class="n">_or0</span>      <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Or</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_or1</span>      <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Or</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_or2</span>      <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Or</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+    <span class="n">_or3</span>      <span class="o">=</span> <span class="n">_dec</span> <span class="o">|</span> <span class="mh">0xaa</span>
+
+    <span class="n">_nor0</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Nor</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_nor1</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Nor</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_nor2</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Nor</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+    <span class="n">_nor3</span>     <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="n">_dec</span> <span class="o">|</span> <span class="mh">0xaa</span><span class="p">)</span> 
+
+    <span class="n">_eq0</span>      <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_eq1</span>      <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_eq2</span>      <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+    <span class="n">_eq3</span>      <span class="o">=</span> <span class="n">_dec</span> <span class="o">==</span> <span class="mh">0xaa</span>
+
+    <span class="n">_neq0</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Ne</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_neq1</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Ne</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_neq2</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Ne</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+    <span class="n">_neq3</span>     <span class="o">=</span> <span class="n">_dec</span> <span class="o">!=</span> <span class="mh">0xaa</span>
+
+    <span class="n">_add0</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_add1</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_add2</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+    <span class="n">_add3</span>     <span class="o">=</span> <span class="n">_dec</span> <span class="o">+</span> <span class="mh">0xaa</span>
+
+    <span class="n">_uaddo0</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Uaddo</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_uaddo1</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Uaddo</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_uaddo2</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Uaddo</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+
+    <span class="n">_saddo0</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Saddo</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_saddo1</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Saddo</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_saddo2</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Saddo</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+
+    <span class="n">_mul0</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Mul</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_mul1</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Mul</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_mul2</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Mul</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+    <span class="n">_mul3</span>     <span class="o">=</span> <span class="n">_dec</span> <span class="o">*</span> <span class="mh">0xaa</span>
+
+    <span class="n">_umulo0</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Umulo</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_umulo1</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Umulo</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_umulo2</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Umulo</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+
+    <span class="n">_smulo0</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Smulo</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_smulo1</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Smulo</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_smulo2</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Smulo</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+
+    <span class="n">_ult0</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Ult</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_ult1</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Ult</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_ult2</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Ult</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+    <span class="n">_ult3</span>     <span class="o">=</span> <span class="n">_dec</span> <span class="o">&lt;</span> <span class="mh">0xaa</span>
+
+    <span class="n">_slt0</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Slt</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_slt1</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Slt</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_slt2</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Slt</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+
+    <span class="n">_ulte0</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Ulte</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_ulte1</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Ulte</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_ulte2</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Ulte</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+    <span class="n">_ulte3</span>    <span class="o">=</span> <span class="n">_dec</span> <span class="o">&lt;=</span> <span class="mh">0xaa</span>
+
+    <span class="n">_slte0</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Slte</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_slte1</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Slte</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_slte2</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Slte</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+
+    <span class="n">_ugt0</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Ugt</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_ugt1</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Ugt</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_ugt2</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Ugt</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+    <span class="n">_ugt3</span>     <span class="o">=</span> <span class="n">_dec</span> <span class="o">&gt;</span> <span class="mh">0xaa</span>
+
+    <span class="n">_sgt0</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Sgt</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_sgt1</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Sgt</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_sgt2</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Sgt</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+
+    <span class="n">_ugte0</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Ugte</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_ugte1</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Ugte</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_ugte2</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Ugte</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+    <span class="n">_ugte3</span>    <span class="o">=</span> <span class="n">_dec</span> <span class="o">&gt;=</span> <span class="mh">0xaa</span>
+
+    <span class="n">_sgte0</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Sgte</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_sgte1</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Sgte</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_sgte2</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Sgte</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+
+    <span class="n">_sll0</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Sll</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">_sll1</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Sll</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mb">0b100</span><span class="p">)</span>
+    <span class="n">_sll2</span>     <span class="o">=</span> <span class="n">_dec</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span>
+
+    <span class="n">_srl0</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Srl</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">_srl1</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Srl</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mb">0b100</span><span class="p">)</span>
+    <span class="n">_srl2</span>     <span class="o">=</span> <span class="n">_dec</span> <span class="o">&gt;&gt;</span> <span class="mi">5</span>
+
+    <span class="n">_sra0</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Sra</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">_sra1</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Sra</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mb">0b100</span><span class="p">)</span>
+
+    <span class="n">_rol0</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Rol</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">_rol1</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Rol</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mb">0b100</span><span class="p">)</span>
+
+    <span class="n">_ror0</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Ror</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">_ror1</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Ror</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mb">0b100</span><span class="p">)</span>
+
+    <span class="n">_sub0</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Sub</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_sub1</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Sub</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_sub2</span>     <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Sub</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+    <span class="n">_sub3</span>     <span class="o">=</span> <span class="n">_dec</span> <span class="o">-</span> <span class="mh">0xaa</span>
+
+    <span class="n">_ssubo0</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Ssubo</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_ssubo1</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Ssubo</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_ssubo2</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Ssubo</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+
+    <span class="n">_udiv0</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Udiv</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_udiv1</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Udiv</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_udiv2</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Udiv</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+    <span class="n">_udiv3</span>    <span class="o">=</span> <span class="n">_dec</span> <span class="o">/</span> <span class="mh">0xaa</span>
+
+    <span class="n">_urem0</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Urem</span><span class="p">(</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_urem1</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Urem</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_urem2</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Urem</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="mh">0xaa</span><span class="p">)</span>
+    <span class="n">_urem3</span>    <span class="o">=</span> <span class="n">_dec</span> <span class="o">%</span> <span class="mh">0xaa</span>
+
+    <span class="n">_sdiv0</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Sdiv</span><span class="p">(</span><span class="o">-</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_sdiv1</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Sdiv</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="o">-</span><span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_sdiv2</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Sdiv</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="o">-</span><span class="mh">0xaa</span><span class="p">)</span>
+
+    <span class="n">_srem0</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Srem</span><span class="p">(</span><span class="o">-</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_srem1</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Srem</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="o">-</span><span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_srem2</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Srem</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="o">-</span><span class="mh">0xaa</span><span class="p">)</span>
+
+    <span class="n">_sdivo0</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Sdivo</span><span class="p">(</span><span class="o">-</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_sdivo1</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Sdivo</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="o">-</span><span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_sdivo2</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Sdivo</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="o">-</span><span class="mh">0xaa</span><span class="p">)</span>
+
+    <span class="n">_smod0</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Smod</span><span class="p">(</span><span class="o">-</span><span class="n">_inc</span><span class="p">,</span> <span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_smod1</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Smod</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="o">-</span><span class="n">_dec</span><span class="p">)</span>
+    <span class="n">_smod2</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Smod</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="o">-</span><span class="mh">0xaa</span><span class="p">)</span>
+
+    <span class="c"># Concatenation of bit vectors</span>
+    <span class="n">_concat</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Concat</span><span class="p">(</span><span class="n">_dec</span><span class="p">,</span> <span class="n">_inc</span><span class="p">)</span>
+
+    <span class="c"># Reads on arrays</span>
+    <span class="n">_read0</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Read</span><span class="p">(</span><span class="n">_array</span><span class="p">,</span> <span class="n">_var</span><span class="p">)</span> 
+    <span class="n">_read1</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Read</span><span class="p">(</span><span class="n">_array</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+    <span class="n">_read2</span>    <span class="o">=</span> <span class="n">_array</span><span class="p">[</span><span class="n">_var</span><span class="p">]</span>
+    <span class="n">_read3</span>    <span class="o">=</span> <span class="n">_array</span><span class="p">[</span><span class="mh">0x1a</span><span class="p">]</span>
+
+    <span class="c"># Writes on arrays</span>
+    <span class="n">_write0</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">_array</span><span class="p">,</span> <span class="n">_var</span><span class="p">,</span> <span class="n">_var</span><span class="p">)</span> 
+    <span class="n">_write1</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">_array</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mb">0b00001</span><span class="p">)</span> 
+
+    <span class="c"># If-Then-Else on bit vectors</span>
+    <span class="n">_cond0</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Cond</span><span class="p">(</span><span class="n">_read0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">_read0</span><span class="p">,</span> <span class="n">_read1</span><span class="p">)</span>
+    <span class="n">_cond1</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Cond</span><span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">_read0</span><span class="p">,</span> <span class="n">_read1</span><span class="p">)</span>
+    <span class="n">_cond2</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Cond</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">_read1</span><span class="p">)</span>
+
+    <span class="c"># If-Then-Else on arrays </span>
+    <span class="n">_cond3</span>    <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Cond</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">_write0</span><span class="p">,</span> <span class="n">_write1</span><span class="p">)</span>
+
+    <span class="c"># Function</span>
+    <span class="n">p0</span>        <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span>
+    <span class="n">p1</span>        <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span>
+    <span class="n">_fun</span>      <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Fun</span><span class="p">([</span><span class="n">p0</span><span class="p">,</span> <span class="n">p1</span><span class="p">],</span> <span class="n">b</span><span class="o">.</span><span class="n">Cond</span><span class="p">(</span><span class="n">p0</span> <span class="o">&lt;</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">p1</span><span class="p">))</span>
+
+    <span class="c"># Uninterpreted function</span>
+    <span class="n">_boolsort</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">BoolSort</span><span class="p">()</span>
+    <span class="n">_bvsort</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">BitVecSort</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span>
+    <span class="n">_funsort</span>  <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">FunSort</span><span class="p">([</span><span class="n">_boolsort</span><span class="p">,</span> <span class="n">_boolsort</span><span class="p">,</span> <span class="n">_bvsort</span><span class="p">,</span> <span class="n">_bvsort</span><span class="p">],</span> <span class="n">_boolsort</span><span class="p">)</span>
+    <span class="n">_uf</span>       <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">UF</span><span class="p">(</span><span class="n">_funsort</span><span class="p">)</span>
+
+    <span class="c"># Function applications</span>
+    <span class="n">_apply0</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Apply</span><span class="p">([</span><span class="n">_var</span><span class="p">,</span> <span class="n">_var</span><span class="p">],</span> <span class="n">_fun</span><span class="p">)</span>
+    <span class="n">_apply1</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Apply</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">_fun</span><span class="p">)</span>
+    <span class="n">_apply2</span>   <span class="o">=</span> <span class="n">_fun</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">_apply3</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Apply</span><span class="p">([</span><span class="n">_true</span><span class="p">,</span> <span class="n">_false</span><span class="p">,</span> <span class="n">_var</span><span class="p">,</span> <span class="n">_var</span><span class="p">],</span> <span class="n">_uf</span><span class="p">)</span>
+    <span class="n">_apply4</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Apply</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">42</span><span class="p">],</span> <span class="n">_uf</span><span class="p">)</span>
+    <span class="n">_apply5</span>   <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Apply</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">42</span><span class="p">],</span> <span class="n">_uf</span><span class="p">)</span>
+    <span class="n">_apply6</span>   <span class="o">=</span> <span class="n">_uf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>
+
+<span class="c">### Node attributes and methods</span>
+
+    <span class="c"># Get symbol</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">_var</span><span class="o">.</span><span class="n">symbol</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">_apply4</span><span class="o">.</span><span class="n">symbol</span>
+
+    <span class="c"># Set symbol</span>
+    <span class="n">_var</span><span class="o">.</span><span class="n">symbol</span> <span class="o">=</span> <span class="s">"new_symbol"</span>
+
+    <span class="c"># Get bit width</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">_apply4</span><span class="o">.</span><span class="n">width</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">_fun</span><span class="o">.</span><span class="n">width</span>
+
+    <span class="c"># Get bit width of array index </span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">_array</span><span class="o">.</span><span class="n">index_width</span>
+
+    <span class="c"># Get arity of functions</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">_fun</span><span class="o">.</span><span class="n">arity</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">_uf</span><span class="o">.</span><span class="n">arity</span>
+
+    <span class="c"># Get bit vector representation of constants as string</span>
+    <span class="n">bits</span> <span class="o">=</span> <span class="n">_const</span><span class="o">.</span><span class="n">bits</span>
+
+    <span class="c"># Dump nodes to stdout or files (default format is BTOR) </span>
+    <span class="n">_apply4</span><span class="o">.</span><span class="n">Dump</span><span class="p">()</span>
+    <span class="c"># Dump to file 'dump.btor'</span>
+    <span class="n">_apply4</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="n">outfile</span><span class="o">=</span><span class="s">"dump.btor"</span><span class="p">)</span>
+    <span class="n">_apply4</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="s">"smt1"</span><span class="p">)</span>
+    <span class="n">_apply4</span><span class="o">.</span><span class="n">Dump</span><span class="p">(</span><span class="s">"smt2"</span><span class="p">)</span>
+    <span class="c"># Dump to file 'dump.smt2'</span>
+<span class="c">#    _apply4.Dump("smt2", "dump.smt2")</span>
+
+<span class="c">### Boolector methods</span>
+
+    <span class="c"># Available options</span>
+    <span class="n">b</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+    <span class="c"># Print available options</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Available Boolector options:"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">"  "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">b</span><span class="o">.</span><span class="n">Options</span><span class="p">()]))</span>
+
+    <span class="c"># Set options</span>
+    <span class="n">b</span><span class="o">.</span><span class="n">Set_opt</span><span class="p">(</span><span class="s">"incremental"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">b</span><span class="o">.</span><span class="n">Set_opt</span><span class="p">(</span><span class="s">"model_gen"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c"># Get options</span>
+    <span class="n">o</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Get_opt</span><span class="p">(</span><span class="s">"model_gen"</span><span class="p">)</span>
+<span class="c">#    print(o.lng)  # long option name</span>
+<span class="c">#    print(o.shrt) # short option name</span>
+<span class="c">#    print(o.desc) # description</span>
+<span class="c">#    print(o.min)  # min value</span>
+<span class="c">#    print(o.max)  # max value</span>
+<span class="c">#    print(o.dflt) # default value</span>
+<span class="c">#    print(o.val)  # current value</span>
+
+    <span class="c"># Set SAT solver (can only be done before the first Sat() call)</span>
+    <span class="c"># Lingeling is the default SAT solver</span>
+    <span class="n">b</span><span class="o">.</span><span class="n">Set_sat_solver</span><span class="p">(</span><span class="s">"MiniSAT"</span><span class="p">)</span>
+    
+    <span class="c"># Assert formulas</span>
+    <span class="n">b</span><span class="o">.</span><span class="n">Assert</span><span class="p">(</span><span class="n">_cond0</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">b</span><span class="o">.</span><span class="n">Assert</span><span class="p">(</span><span class="n">_apply5</span> <span class="o">!=</span> <span class="n">_apply3</span><span class="p">)</span>
+
+    <span class="c"># Assume formulas</span>
+    <span class="n">b</span><span class="o">.</span><span class="n">Assume</span><span class="p">(</span><span class="n">_cond1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c"># Run simplification separately</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Simplify</span><span class="p">()</span>
+
+    <span class="c"># Clone boolector instance 'b'</span>
+    <span class="n">bb</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Clone</span><span class="p">()</span>
+
+    <span class="c"># Check sat</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">Sat</span><span class="p">()</span>
+    <span class="c"># Check sat with limits</span>
+<span class="c">#    res = b.Sat(100, 10000)</span>
+<span class="c">#    res = b.Sat(lod_limit=100, sat_limit=10000)</span>
+
+    <span class="c"># Get model or query assignments for nodes</span>
+    <span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="n">b</span><span class="o">.</span><span class="n">SAT</span><span class="p">:</span>
+        <span class="c"># Get model and print to stdout</span>
+        <span class="n">b</span><span class="o">.</span><span class="n">Print_model</span><span class="p">()</span>
+        <span class="c"># Get model and print to file 'model.out'</span>
+<span class="c">#        b.Print_model("model.out")</span>
+
+         <span class="c"># Query assignments</span>
+<span class="c">#        print("Query assignments:")</span>
+<span class="c">#        print("{} {}".format(_var.symbol, _var.assignment))</span>
+<span class="c">#        print("{} {}".format(_array.symbol, _array.assignment))</span>
+<span class="c">#        print("{} {}".format(_uf.symbol, _uf.assignment))</span>
+
+    <span class="c"># Get matching node of _cond0 in clone 'bb'</span>
+    <span class="n">_cond0_matched</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="n">Match</span><span class="p">(</span><span class="n">_cond0</span><span class="p">)</span>
+    <span class="c"># Assume</span>
+    <span class="n">bb</span><span class="o">.</span><span class="n">Assume</span><span class="p">(</span><span class="o">~</span><span class="n">_cond0_matched</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">bb</span><span class="o">.</span><span class="n">Assume</span><span class="p">(</span><span class="n">_cond0_matched</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="c"># Check sat</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="n">Sat</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="n">b</span><span class="o">.</span><span class="n">UNSAT</span><span class="p">:</span>
+        <span class="c"># Check if assumptions are failed</span>
+        <span class="n">bb</span><span class="o">.</span><span class="n">Failed</span><span class="p">(</span><span class="o">~</span><span class="n">_cond0_matched</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">bb</span><span class="o">.</span><span class="n">Failed</span><span class="p">(</span><span class="n">_cond0_matched</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="http://fmv.jku.at/boolector/doc/genindex.html" title="General Index">index</a></li>
+        <li class="right">
+          <a href="http://fmv.jku.at/boolector/doc/boolector.html" title="Module Index: boolector">next</a> |</li>
+        <li class="right">
+          <a href="http://fmv.jku.at/boolector/doc/cboolector_index.html" title="C Interface">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="http://fmv.jku.at/boolector/doc/index.html">Boolector 2.2 documentation</a> »</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        © Copyright 2007-2015, Institute for Formal Models and Verification, Johannes Kepler University, Linz, Austria.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  
+</body></html>

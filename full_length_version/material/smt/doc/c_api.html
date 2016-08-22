@@ -1,0 +1,815 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Boolector C API documentation — Boolector 2.2 documentation</title>
+    
+    <link rel="stylesheet" href="c_api_files/sphinxdoc.css" type="text/css">
+    <link rel="stylesheet" href="c_api_files/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="c_api_files/jquery.js"></script>
+    <script type="text/javascript" src="c_api_files/underscore.js"></script>
+    <script type="text/javascript" src="c_api_files/doctools.js"></script>
+    <link rel="top" title="Boolector 2.2 documentation" href="http://fmv.jku.at/boolector/doc/index.html">
+    <link rel="next" title="C Interface" href="http://fmv.jku.at/boolector/doc/cboolector_index.html">
+    <link rel="prev" title="Welcome to Boolector’s API documentation!" href="http://fmv.jku.at/boolector/doc/index.html"> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="http://fmv.jku.at/boolector/doc/genindex.html" title="General Index" accesskey="I">index</a></li>
+        <li class="right">
+          <a href="http://fmv.jku.at/boolector/doc/cboolector_index.html" title="C Interface" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="http://fmv.jku.at/boolector/doc/index.html" title="Welcome to Boolector’s API documentation!" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="http://fmv.jku.at/boolector/doc/index.html">Boolector 2.2 documentation</a> »</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="http://fmv.jku.at/boolector/doc/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Boolector C API documentation</a><ul>
+<li><a class="reference internal" href="#interface">Interface</a></li>
+<li><a class="reference internal" href="#quickstart">Quickstart</a></li>
+<li><a class="reference internal" href="#options">Options</a><ul>
+<li><a class="reference internal" href="#api-tracing">API Tracing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#internals">Internals</a><ul>
+<li><a class="reference internal" href="#operators">Operators</a></li>
+<li><a class="reference internal" href="#rewriting">Rewriting</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#bit-vector-examples">Bit vector examples</a></li>
+<li><a class="reference internal" href="#array-examples">Array examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="http://fmv.jku.at/boolector/doc/index.html" title="previous chapter">Welcome to Boolector’s API documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="http://fmv.jku.at/boolector/doc/cboolector_index.html" title="next chapter">C Interface</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input name="q" type="text">
+      <input value="Go" type="submit">
+      <input name="check_keywords" value="yes" type="hidden">
+      <input name="area" value="default" type="hidden">
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="boolector-c-api-documentation">
+<h1>Boolector C API documentation<a class="headerlink" href="#boolector-c-api-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html">C Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#macros">Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#typedefs">Typedefs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#deprecated">Deprecated</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="quickstart">
+<h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>First, create a Boolector instance:</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">Btor</span> <span class="o">*</span><span class="n">btor</span> <span class="o">=</span> <span class="n">boolector_new</span> <span class="p">();</span>
+</pre></div>
+</div>
+<p>You can configure this instance via <a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_set_opt" title="boolector_set_opt"><code class="xref c c-func docutils literal"><span class="pre">boolector_set_opt()</span></code></a>
+E.g., if you want to enable model generation:</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">boolector_set_opt</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="s">"model_gen"</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>For a detailed description of all configurable options, see
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_set_opt" title="boolector_set_opt"><code class="xref c c-func docutils literal"><span class="pre">boolector_set_opt()</span></code></a>.</p>
+<p>Next you can either parse an input file, and/or generate expressions to
+be either asserted via <a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_assert" title="boolector_assert"><code class="xref c c-func docutils literal"><span class="pre">boolector_assert()</span></code></a>, or, if incremental usage
+is enabled, assumed via <a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_assume" title="boolector_assume"><code class="xref c c-func docutils literal"><span class="pre">boolector_assume()</span></code></a> (analogously to
+MiniSAT).
+Note that Boolector’s internal design is motivated by hardware design,
+hence we do not distinguish between type <em>Boolean</em> and type <em>bit vector
+of length 1</em>.</p>
+<p>E.g., if you want to parse an input file “example.btor”, you can either
+use <a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_parse" title="boolector_parse"><code class="xref c c-func docutils literal"><span class="pre">boolector_parse()</span></code></a> or <a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_parse_btor" title="boolector_parse_btor"><code class="xref c c-func docutils literal"><span class="pre">boolector_parse_btor()</span></code></a>:</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="kt">char</span> <span class="o">*</span><span class="n">error_msg</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">status</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">result</span><span class="p">;</span>
+<span class="kt">FILE</span> <span class="o">*</span><span class="n">fd</span> <span class="o">=</span> <span class="n">fopen</span> <span class="p">(</span><span class="s">"example.btor"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">);</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">boolector_parse_btor</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">fd</span><span class="p">,</span> <span class="s">"example.btor"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">error_msg</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">status</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Incremental usage is not enabled, hence, if the parser does not encounter
+an error, it returns <a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.BOOLECTOR_UNKNOWN" title="BOOLECTOR_UNKNOWN"><code class="xref c c-macro docutils literal"><span class="pre">BOOLECTOR_UNKNOWN</span></code></a> (for a more detailed
+description of the parsers return values, see <a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_parse" title="boolector_parse"><code class="xref c c-func docutils literal"><span class="pre">boolector_parse()</span></code></a>).
+However, if the parser encounters an error, it returns
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.BOOLECTOR_PARSE_ERROR" title="BOOLECTOR_PARSE_ERROR"><code class="xref c c-macro docutils literal"><span class="pre">BOOLECTOR_PARSE_ERROR</span></code></a> and an explanation of that error is
+stored in <code class="docutils literal"><span class="pre">error_msg</span></code>. If the input file specifies a (known) status
+of the input formula (either satisfiable or unsatisfiable), that status
+is stored in <code class="docutils literal"><span class="pre">status</span></code>.</p>
+<p>As an example for generating and asserting expressions via
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_assert" title="boolector_assert"><code class="xref c c-func docutils literal"><span class="pre">boolector_assert()</span></code></a>, consider the following example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="mi">0</span> <span class="o">&lt;</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">100</span>
+</pre></div>
+</div>
+<p>Given the Boolector instance created above, we generate and assert
+the following expressions:</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">BtorNode</span> <span class="o">*</span><span class="n">x</span> <span class="o">=</span> <span class="n">boolector_var</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s">"x"</span><span class="p">);</span>
+<span class="n">BtorNode</span> <span class="o">*</span><span class="n">y</span> <span class="o">=</span> <span class="n">boolector_var</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s">"y"</span><span class="p">);</span>
+<span class="n">BtorNode</span> <span class="o">*</span><span class="n">zero</span> <span class="o">=</span> <span class="n">boolector_zero</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
+<span class="n">BtorNode</span> <span class="o">*</span><span class="n">hundred</span> <span class="o">=</span> <span class="n">boolector_int</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
+
+<span class="c1">// 0 &lt; x</span>
+<span class="n">BoolectorNode</span> <span class="o">*</span><span class="n">ult_x</span> <span class="o">=</span> <span class="n">boolector_ult</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+<span class="n">boolector_assert</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ult_x</span><span class="p">);</span>
+
+<span class="c1">// x &lt;= 100</span>
+<span class="n">BtorNode</span> <span class="o">*</span><span class="n">ulte_x</span> <span class="o">=</span> <span class="n">boolector_ulte</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">hundred</span><span class="p">);</span>
+<span class="n">boolector_assert</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ulte_x</span><span class="p">);</span>
+
+<span class="c1">// 0 &lt; y</span>
+<span class="n">BtorNode</span> <span class="o">*</span><span class="n">ult_y</span> <span class="o">=</span> <span class="n">boolector_ult</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+<span class="n">boolector_assert</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ult_y</span><span class="p">);</span>
+
+<span class="c1">// y &lt;= 100</span>
+<span class="n">BtorNode</span> <span class="o">*</span><span class="n">ulte_y</span> <span class="o">=</span> <span class="n">boolector_ulte</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">hundred</span><span class="p">);</span>
+<span class="n">boolector_assert</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ulte_y</span><span class="p">);</span>
+
+<span class="c1">// x * y</span>
+<span class="n">BtorNode</span> <span class="o">*</span><span class="n">mul</span> <span class="o">=</span> <span class="n">boolector_mul</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+
+<span class="c1">// x * y &lt; 100</span>
+<span class="n">BtorNode</span> <span class="o">*</span><span class="n">ult</span> <span class="o">=</span> <span class="n">boolector_ult</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">mul</span><span class="p">,</span> <span class="n">hundred</span><span class="p">);</span>
+<span class="n">boolector_assert</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ult</span><span class="p">);</span>
+<span class="n">BtorNode</span> <span class="o">*</span><span class="n">umulo</span> <span class="o">=</span> <span class="n">boolector_umulo</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+<span class="n">BtorNode</span> <span class="o">*</span><span class="n">numulo</span> <span class="o">=</span> <span class="n">boolector_not</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">umulo</span><span class="p">);</span>  <span class="c1">// prevent overflow</span>
+<span class="n">boolector_assert</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">numulo</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After parsing an input file and/or asserting/assuming expressions,
+the satisfiability of the resulting formula can be determined via
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_sat" title="boolector_sat"><code class="xref c c-func docutils literal"><span class="pre">boolector_sat()</span></code></a>. If the resulting formula is satisfiable and model
+generation has been enabled via <a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_set_opt" title="boolector_set_opt"><code class="xref c c-func docutils literal"><span class="pre">boolector_set_opt()</span></code></a>, you can either
+print the resulting model via <a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_print_model" title="boolector_print_model"><code class="xref c c-func docutils literal"><span class="pre">boolector_print_model()</span></code></a>,
+or query assignments
+of bit vector and array variables or uninterpreted functions via
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_bv_assignment" title="boolector_bv_assignment"><code class="xref c c-func docutils literal"><span class="pre">boolector_bv_assignment()</span></code></a>, <a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_array_assignment" title="boolector_array_assignment"><code class="xref c c-func docutils literal"><span class="pre">boolector_array_assignment()</span></code></a> and
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_uf_assignment" title="boolector_uf_assignment"><code class="xref c c-func docutils literal"><span class="pre">boolector_uf_assignment()</span></code></a>.
+Note that querying assignments is not limited to variables—you can query
+the assignment of any arbitrary expression.</p>
+<p>E.g., given the example above, we first determine if the formula is
+satisfiable via <a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_sat" title="boolector_sat"><code class="xref c c-func docutils literal"><span class="pre">boolector_sat()</span></code></a> (which it is):</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">boolector_sat</span> <span class="p">(</span><span class="n">btor</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Now you can either query the assignments of variables <code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code>:</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="kt">char</span> <span class="o">*</span><span class="n">xstr</span> <span class="o">=</span> <span class="n">boolector_bv_assignment</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>  <span class="c1">// returns "00000100"</span>
+<span class="kt">char</span> <span class="o">*</span><span class="n">ystr</span> <span class="o">=</span> <span class="n">boolector_bv_assignment</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>  <span class="c1">// returns "00010101"</span>
+</pre></div>
+</div>
+<p>or print the resulting model via <a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_print_model" title="boolector_print_model"><code class="xref c c-func docutils literal"><span class="pre">boolector_print_model()</span></code></a>.
+Boolector supports printing models in its own format (“btor”) or in
+<a class="reference external" href="http://smtlib.cs.uiowa.edu/papers/smt-lib-reference-v2.0-r12.09.09.pdf">SMT-LIB v2</a> format (“smt2”). Printing the resulting model in
+Boolector’s own format:</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">boolector_print_model</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="s">"btor"</span><span class="p">,</span> <span class="n">stdout</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>A possible model would be:</p>
+<div class="highlight-python"><div class="highlight"><pre>2 00000100 x
+3 00010101 y
+</pre></div>
+</div>
+<p>which in this case indicates the assignments of bit vector variables
+<code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code>. Note that the first column indicates the id of an input,
+the second column its assignment, and the third column its name (or symbol)
+if any.
+In the case that the formula includes arrays as input, their values at a
+certain index are indicated as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre>4[00] 01 A
+</pre></div>
+</div>
+<p>where A has id 4 and is an array with index and element bit width of 2,
+and its value at index 0 is 1.</p>
+<p>Printing the above model in <a class="reference external" href="http://smtlib.cs.uiowa.edu/papers/smt-lib-reference-v2.0-r12.09.09.pdf">SMT-LIB v2</a> format:</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">boolector_print_model</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="s">"smt2"</span><span class="p">,</span> <span class="n">stdout</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>A possible model would be:</p>
+<div class="highlight-python"><div class="highlight"><pre>(model
+  (define-fun x () (_ BitVec 8) #b00000100)
+  (define-fun y () (_ BitVec 8) #b00010101)
+  (define-fun y (
+   (y_x0 (_ BitVec 2)))
+   (ite (= y_x0 #b00) #b01
+     #00))
+)
+</pre></div>
+</div>
+<p>Note that Boolector internally represents arrays as uninterpreted functions,
+hence array models are printed as models for UF (without an explicit
+typecast).</p>
+<p>Finally, in case that you generated expressions, you have to clean up,
+i.e., release those expressions
+(see <a class="reference internal" href="#c-internals"><span>Internals</span></a> and <a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_release" title="boolector_release"><code class="xref c c-func docutils literal"><span class="pre">boolector_release()</span></code></a>),
+and delete Boolector instance <code class="docutils literal"><span class="pre">btor</span></code> via <a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_delete" title="boolector_delete"><code class="xref c c-func docutils literal"><span class="pre">boolector_delete()</span></code></a>.
+E.g., following from the example above, we proceed as follows:</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+<span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+<span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">zero</span><span class="p">);</span>
+<span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">hundred</span><span class="p">);</span>
+<span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ult_x</span><span class="p">);</span>
+<span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ulte_x</span><span class="p">);</span>
+<span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ult_y</span><span class="p">);</span>
+<span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ulte_y</span><span class="p">);</span>
+<span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">mul</span><span class="p">);</span>
+<span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ult</span><span class="p">);</span>
+<span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">numulo</span><span class="p">);</span>
+<span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">umulo</span><span class="p">);</span>
+<span class="n">boolector_delete</span> <span class="p">(</span><span class="n">btor</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Note that in case you generated assignment strings you have to release them
+as well:</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">boolector_free_bv_assignment</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">xstr</span><span class="p">);</span>
+<span class="n">boolector_free_bv_assignment</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ystr</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Boolector can be configured either via <a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_set_opt" title="boolector_set_opt"><code class="xref c c-func docutils literal"><span class="pre">boolector_set_opt()</span></code></a>,
+or via environment variables of the form:</p>
+<div class="highlight-python"><div class="highlight"><pre>BTOR&lt;capitalized option name without '_'&gt;=&lt;value&gt;
+</pre></div>
+</div>
+<p>For a list and detailed descriptions of all available options,
+see <a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_set_opt" title="boolector_set_opt"><code class="xref c c-func docutils literal"><span class="pre">boolector_set_opt()</span></code></a>.</p>
+<p>E.g., given a Boolector instance <code class="docutils literal"><span class="pre">btor</span></code>, model generation is enabled either
+via</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">boolector_set_opt</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="s">"model_gen"</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>or via setting the environment variable:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">BTORMODELGEN</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="section" id="api-tracing">
+<h3>API Tracing<a class="headerlink" href="#api-tracing" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>API tracing allows to record every call to Boolector’s public API. The
+resulting trace can be replayed and the replayed sequence behaves exactly
+like the original Boolector run.
+This is particularly useful for debugging purposes, as it enables replaying
+erroneous behaviour.
+API tracing can be enabled either via <a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_set_trapi" title="boolector_set_trapi"><code class="xref c c-func docutils literal"><span class="pre">boolector_set_trapi()</span></code></a> or by
+setting the environment variable <code class="docutils literal"><span class="pre">BTORAPITRACE=&lt;filename&gt;</span></code>.</p>
+<p>E.g., given a Boolector instance <code class="docutils literal"><span class="pre">btor</span></code>, enabling API tracing is done as
+follows:</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="kt">FILE</span> <span class="o">*</span><span class="n">fd</span> <span class="o">=</span> <span class="n">fopen</span> <span class="p">(</span><span class="s">"error.trace"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">);</span>
+<span class="n">boolector_set_trapi</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">fd</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">BTORAPITRACE</span><span class="o">=</span><span class="s">"error.trace"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="internals">
+<span id="c-internals"></span><h2>Internals<a class="headerlink" href="#internals" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Boolector internally maintains a directed acyclic graph (DAG) of
+expressions. As a consequence, each expression maintains a reference
+counter, which is initially set to 1.
+Each time an expression is shared, i.e. for each API call that returns
+an expression (a BoolectorNode), its reference counter is incremented
+by 1. Not considering API calls that generate expressions, this mainly
+applies to <a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_copy" title="boolector_copy"><code class="xref c c-func docutils literal"><span class="pre">boolector_copy()</span></code></a>, which simply increments the reference
+counter of an expression, and <a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_match_node" title="boolector_match_node"><code class="xref c c-func docutils literal"><span class="pre">boolector_match_node()</span></code></a> resp.
+<a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_match_node_by_id" title="boolector_match_node_by_id"><code class="xref c c-func docutils literal"><span class="pre">boolector_match_node_by_id()</span></code></a>, which retrieve nodes of a given
+Boolector instance by id resp. a given node’s id.
+Expressions are released via <a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_release" title="boolector_release"><code class="xref c c-func docutils literal"><span class="pre">boolector_release()</span></code></a>, and if its
+reference counter is decremented to zero, it is deleted from memory.
+Note that by asserting an expression, it will be permanently added to the
+formula, i.e. Boolector internally holds its reference until it is either
+eliminated via rewriting, or the Boolector instance is deleted.
+Following from that, it is safe to release an expression as soon as you
+asserted it, as long as you don’t need it for further querying.</div></blockquote>
+<div class="section" id="operators">
+<h3>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>Boolector internally describes expressions by means of a set of base
+operators as documented in <a class="reference external" href="http://fmv.jku.at/papers/BrummayerBiereLonsing-BPR08.pdf">BTOR</a>.
+Boolector’s API, however, provides a richer set of operators for
+convenience, where non-base operators are internally rewritten to use
+base operators only.
+E.g., two’s complement (<a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_neg" title="boolector_neg"><code class="xref c c-func docutils literal"><span class="pre">boolector_neg()</span></code></a>) is rewritten as one’s
+complement and addition of 1.
+Note that this behaviour is not influenced by the rewrite level chosen.</div></blockquote>
+</div>
+<div class="section" id="rewriting">
+<h3>Rewriting<a class="headerlink" href="#rewriting" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>Boolector simplifies expressions and the expression DAG by means of
+rewriting and supports three so-called rewrite levels.
+Increasing rewrite levels increase the extent of rewriting performed,
+and a rewrite level of 0 is equivalent to disabling rewriting at all.
+Note that Boolector not only simplifies expressions during construction
+of the expression DAG—for each call to <a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_sat" title="boolector_sat"><code class="xref c c-func docutils literal"><span class="pre">boolector_sat()</span></code></a>,
+various simplification techniques and rewriting phases are initiated.
+You can force Boolector to initiate rewriting and simplify the expression
+DAG via <a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_simplify" title="boolector_simplify"><code class="xref c c-func docutils literal"><span class="pre">boolector_simplify()</span></code></a>.
+The rewrite level can be configured via <a class="reference internal" href="http://fmv.jku.at/boolector/doc/cboolector_index.html#c.boolector_set_opt" title="boolector_set_opt"><code class="xref c c-func docutils literal"><span class="pre">boolector_set_opt()</span></code></a>.</div></blockquote>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="bit-vector-examples">
+<h3>Bit vector examples<a class="headerlink" href="#bit-vector-examples" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="highlight-c"><div class="highlight"><pre><span class="cp">#include "boolector.h"</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;assert.h&gt;</span>
+
+<span class="cp">#define BV1_EXAMPLE_NUM_BITS 8</span>
+
+<span class="cm">/* We verify the XOR swap algorithm. The XOR bitwise operation can</span>
+<span class="cm"> * be used to swap variables without using a temporary variable:</span>
+<span class="cm"> * int x, y;</span>
+<span class="cm"> * ...</span>
+<span class="cm"> * x = x ^ y</span>
+<span class="cm"> * y = x ^ y</span>
+<span class="cm"> * x = x ^ y</span>
+<span class="cm"> */</span>
+
+<span class="kt">int</span>
+<span class="nf">main</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">Btor</span> <span class="o">*</span><span class="n">btor</span><span class="p">;</span>
+  <span class="n">BoolectorNode</span> <span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="n">temp</span><span class="p">,</span> <span class="o">*</span><span class="n">old_x</span><span class="p">,</span> <span class="o">*</span><span class="n">old_y</span><span class="p">,</span> <span class="o">*</span><span class="n">eq1</span><span class="p">,</span> <span class="o">*</span><span class="n">eq2</span><span class="p">,</span> <span class="o">*</span><span class="n">and</span><span class="p">,</span> <span class="o">*</span><span class="n">formula</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">result</span><span class="p">;</span>
+
+  <span class="n">btor</span> <span class="o">=</span> <span class="n">boolector_new</span> <span class="p">();</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">boolector_var</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">BV1_EXAMPLE_NUM_BITS</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">boolector_var</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">BV1_EXAMPLE_NUM_BITS</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+  <span class="cm">/* remember initial values of x and y */</span>
+  <span class="n">old_x</span> <span class="o">=</span> <span class="n">boolector_copy</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+  <span class="n">old_y</span> <span class="o">=</span> <span class="n">boolector_copy</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+
+  <span class="cm">/* x = x ^ y */</span>
+  <span class="n">temp</span> <span class="o">=</span> <span class="n">boolector_xor</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+
+  <span class="cm">/* y = x ^ y */</span>
+  <span class="n">temp</span> <span class="o">=</span> <span class="n">boolector_xor</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+
+  <span class="cm">/* x = x ^ y */</span>
+  <span class="n">temp</span> <span class="o">=</span> <span class="n">boolector_xor</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+
+  <span class="cm">/* Now, we have to show that old_x = y and old_y = x */</span>
+  <span class="n">eq1</span> <span class="o">=</span> <span class="n">boolector_eq</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">old_x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+  <span class="n">eq2</span> <span class="o">=</span> <span class="n">boolector_eq</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">old_y</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+  <span class="n">and</span> <span class="o">=</span> <span class="n">boolector_and</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">eq1</span><span class="p">,</span> <span class="n">eq2</span><span class="p">);</span>
+
+  <span class="cm">/* In order to prove that this is a theorem, we negate the whole</span>
+<span class="cm">   * formula and show that the negation is unsatisfiable */</span>
+  <span class="n">formula</span> <span class="o">=</span> <span class="n">boolector_not</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">and</span><span class="p">);</span>
+
+  <span class="cm">/* We assert the formula and call Boolector */</span>
+  <span class="n">boolector_assert</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">formula</span><span class="p">);</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">boolector_sat</span> <span class="p">(</span><span class="n">btor</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="n">BOOLECTOR_UNSAT</span><span class="p">)</span>
+    <span class="n">printf</span> <span class="p">(</span><span class="s">"Formula is unsatisfiable</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+  <span class="k">else</span>
+    <span class="n">abort</span> <span class="p">();</span>
+
+  <span class="cm">/* cleanup */</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">old_x</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">old_y</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">eq1</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">eq2</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">and</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">formula</span><span class="p">);</span>
+  <span class="n">assert</span> <span class="p">(</span><span class="n">boolector_get_refs</span> <span class="p">(</span><span class="n">btor</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="n">boolector_delete</span> <span class="p">(</span><span class="n">btor</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-c"><div class="highlight"><pre><span class="cp">#include "boolector.h"</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;assert.h&gt;</span>
+
+<span class="cp">#define BV2_EXAMPLE_NUM_BITS 8</span>
+
+<span class="cm">/* We try to show the following theorem:</span>
+<span class="cm"> * v1 &gt; 0 &amp; v2 &gt; 0  =&gt;  v1 + v2 &gt; 0</span>
+<span class="cm"> *</span>
+<span class="cm"> * The theorem is valid if v1 and v2 are naturals, but not if they</span>
+<span class="cm"> * are two's complement bit-vectors as addition can overflow.</span>
+<span class="cm"> */</span>
+
+<span class="kt">int</span>
+<span class="nf">main</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">Btor</span> <span class="o">*</span><span class="n">btor</span><span class="p">;</span>
+  <span class="n">BoolectorNode</span> <span class="o">*</span><span class="n">v1</span><span class="p">,</span> <span class="o">*</span><span class="n">v2</span><span class="p">,</span> <span class="o">*</span><span class="n">add</span><span class="p">,</span> <span class="o">*</span><span class="n">zero</span><span class="p">,</span> <span class="o">*</span><span class="n">vars_sgt_zero</span><span class="p">,</span> <span class="o">*</span><span class="n">impl</span><span class="p">;</span>
+  <span class="n">BoolectorNode</span> <span class="o">*</span><span class="n">v1_sgt_zero</span><span class="p">,</span> <span class="o">*</span><span class="n">v2_sgt_zero</span><span class="p">,</span> <span class="o">*</span><span class="n">add_sgt_zero</span><span class="p">,</span> <span class="o">*</span><span class="n">formula</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">assignments</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+  <span class="kt">int</span> <span class="n">result</span><span class="p">,</span> <span class="n">i</span><span class="p">;</span>
+
+  <span class="n">btor</span> <span class="o">=</span> <span class="n">boolector_new</span> <span class="p">();</span>
+  <span class="n">boolector_set_opt</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="s">"model_gen"</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+  <span class="n">v1</span> <span class="o">=</span> <span class="n">boolector_var</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">BV2_EXAMPLE_NUM_BITS</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+  <span class="n">v2</span> <span class="o">=</span> <span class="n">boolector_var</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">BV2_EXAMPLE_NUM_BITS</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+  <span class="n">zero</span> <span class="o">=</span> <span class="n">boolector_zero</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">BV2_EXAMPLE_NUM_BITS</span><span class="p">);</span>
+
+  <span class="n">v1_sgt_zero</span> <span class="o">=</span> <span class="n">boolector_sgt</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">zero</span><span class="p">);</span>
+  <span class="n">v2_sgt_zero</span> <span class="o">=</span> <span class="n">boolector_sgt</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">zero</span><span class="p">);</span>
+  <span class="n">vars_sgt_zero</span> <span class="o">=</span> <span class="n">boolector_and</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">v1_sgt_zero</span><span class="p">,</span> <span class="n">v2_sgt_zero</span><span class="p">);</span>
+
+  <span class="n">add</span> <span class="o">=</span> <span class="n">boolector_add</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">);</span>
+  <span class="n">add_sgt_zero</span> <span class="o">=</span> <span class="n">boolector_sgt</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">add</span><span class="p">,</span> <span class="n">zero</span><span class="p">);</span>
+
+  <span class="n">impl</span> <span class="o">=</span> <span class="n">boolector_implies</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">vars_sgt_zero</span><span class="p">,</span> <span class="n">add_sgt_zero</span><span class="p">);</span>
+
+  <span class="cm">/* We negate the formula and try to show that the negation is unsatisfiable */</span>
+  <span class="n">formula</span> <span class="o">=</span> <span class="n">boolector_not</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">impl</span><span class="p">);</span>
+
+  <span class="cm">/* We assert the formula and call Boolector */</span>
+  <span class="n">boolector_assert</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">formula</span><span class="p">);</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">boolector_sat</span> <span class="p">(</span><span class="n">btor</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="n">BOOLECTOR_SAT</span><span class="p">)</span>
+    <span class="n">printf</span> <span class="p">(</span><span class="s">"Instance is satisfiable"</span><span class="p">);</span>
+  <span class="k">else</span>
+    <span class="n">abort</span> <span class="p">();</span>
+
+  <span class="cm">/* The formula is not valid, we have found a counter-example.</span>
+<span class="cm">   * Now, we are able to obtain assignments to arbitrary expressions */</span>
+  <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">assignments</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">boolector_bv_assignment</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">zero</span><span class="p">);</span>
+  <span class="n">assignments</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">boolector_bv_assignment</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">v1</span><span class="p">);</span>
+  <span class="n">assignments</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">boolector_bv_assignment</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">v2</span><span class="p">);</span>
+  <span class="n">assignments</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">boolector_bv_assignment</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">add</span><span class="p">);</span>
+  <span class="n">assignments</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">boolector_bv_assignment</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">v1_sgt_zero</span><span class="p">);</span>
+  <span class="n">assignments</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">boolector_bv_assignment</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">v2_sgt_zero</span><span class="p">);</span>
+  <span class="n">assignments</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">boolector_bv_assignment</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">vars_sgt_zero</span><span class="p">);</span>
+  <span class="n">assignments</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">boolector_bv_assignment</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">add_sgt_zero</span><span class="p">);</span>
+  <span class="n">assignments</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">boolector_bv_assignment</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">impl</span><span class="p">);</span>
+  <span class="n">assignments</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">boolector_bv_assignment</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">formula</span><span class="p">);</span>
+
+  <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">printf</span> <span class="p">(</span><span class="s">"Assignment to 0: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">assignments</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]);</span>
+  <span class="n">printf</span> <span class="p">(</span><span class="s">"Assignment to v1: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">assignments</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]);</span>
+  <span class="n">printf</span> <span class="p">(</span><span class="s">"Assignment to v2: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">assignments</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]);</span>
+  <span class="n">printf</span> <span class="p">(</span><span class="s">"Assignment to v1 + v2: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">assignments</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]);</span>
+  <span class="n">printf</span> <span class="p">(</span><span class="s">"Assignment to v1 &gt; 0: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">assignments</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]);</span>
+  <span class="n">printf</span> <span class="p">(</span><span class="s">"Assignment to v2 &gt; 0: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">assignments</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]);</span>
+  <span class="n">printf</span> <span class="p">(</span><span class="s">"Assignment to v1 &gt; 0 &amp; v2 &gt; 0: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">assignments</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]);</span>
+  <span class="n">printf</span> <span class="p">(</span><span class="s">"Assignment to v1 + v2 &gt; 0: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">assignments</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]);</span>
+  <span class="n">printf</span> <span class="p">(</span><span class="s">"Assignment to v1 &gt; 0 &amp; v2 &gt; 0  =&gt; v1 + v2 &gt; 0: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+	  <span class="n">assignments</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]);</span>
+  <span class="n">printf</span> <span class="p">(</span><span class="s">"Assignment to !(v1 &gt; 0 &amp; v2 &gt; 0  =&gt; v1 + v2 &gt; 0): %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+	  <span class="n">assignments</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]);</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="n">boolector_free_bv_assignment</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">assignments</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+
+  <span class="cm">/* cleanup */</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">zero</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">v1</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">v2</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">add</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">impl</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">formula</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">v1_sgt_zero</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">v2_sgt_zero</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">vars_sgt_zero</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">add_sgt_zero</span><span class="p">);</span>
+  <span class="n">assert</span> <span class="p">(</span><span class="n">boolector_get_refs</span> <span class="p">(</span><span class="n">btor</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="n">boolector_delete</span> <span class="p">(</span><span class="n">btor</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="array-examples">
+<h3>Array examples<a class="headerlink" href="#array-examples" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="highlight-c"><div class="highlight"><pre><span class="cp">#include "boolector.h"</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;assert.h&gt;</span>
+
+<span class="cp">#define ARRAY1_EXAMPLE_VALUE_BW 8</span>
+<span class="cp">#define ARRAY1_EXAMPLE_INDEX_BW 3</span>
+<span class="cp">#define ARRAY1_EXAMPLE_ARRAY_SIZE (1 &lt;&lt; ARRAY1_EXAMPLE_INDEX_BW)</span>
+
+<span class="cm">/* We verify the following linear search algorithm. We iterate over an array</span>
+<span class="cm"> * and compute a maximum value as the following pseudo code shows:</span>
+<span class="cm"> *</span>
+<span class="cm"> * unsigned int array[ARRAY_SIZE];</span>
+<span class="cm"> * unsigned int max;</span>
+<span class="cm"> * int i;</span>
+<span class="cm"> * ...</span>
+<span class="cm"> * max = array[0];</span>
+<span class="cm"> * for (i = 1; i &lt; ARRAY_SIZE; i++)</span>
+<span class="cm"> *   if (array[i] &gt; max)</span>
+<span class="cm"> *     max = array[i]</span>
+<span class="cm"> *</span>
+<span class="cm"> * Finally, we prove that it is not possible to find an array position</span>
+<span class="cm"> * such that the value stored at this position is greater than 'max'.</span>
+<span class="cm"> * If we can show this, we have proved that this algorithm indeed finds</span>
+<span class="cm"> * a maximum value. Note that we prove that the algorithm finds an</span>
+<span class="cm"> * arbitrary maximum (multiple maxima are possible), not necessarily</span>
+<span class="cm"> * the first maximum.</span>
+<span class="cm"> */</span>
+
+<span class="kt">int</span>
+<span class="nf">main</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">Btor</span> <span class="o">*</span><span class="n">btor</span><span class="p">;</span>
+  <span class="n">BoolectorNode</span> <span class="o">*</span><span class="n">array</span><span class="p">,</span> <span class="o">*</span><span class="n">read</span><span class="p">,</span> <span class="o">*</span><span class="n">max</span><span class="p">,</span> <span class="o">*</span><span class="n">temp</span><span class="p">,</span> <span class="o">*</span><span class="n">ugt</span><span class="p">,</span> <span class="o">*</span><span class="n">formula</span><span class="p">,</span> <span class="o">*</span><span class="n">index</span><span class="p">;</span>
+  <span class="n">BoolectorNode</span> <span class="o">*</span><span class="n">indices</span><span class="p">[</span><span class="n">ARRAY1_EXAMPLE_ARRAY_SIZE</span><span class="p">];</span>
+  <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">result</span><span class="p">;</span>
+
+  <span class="n">btor</span> <span class="o">=</span> <span class="n">boolector_new</span> <span class="p">();</span>
+  <span class="cm">/* We create all possible constants that are used as read indices */</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">ARRAY1_EXAMPLE_ARRAY_SIZE</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">boolector_int</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">ARRAY1_EXAMPLE_INDEX_BW</span><span class="p">);</span>
+
+  <span class="n">array</span> <span class="o">=</span>
+    <span class="n">boolector_array</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ARRAY1_EXAMPLE_VALUE_BW</span><span class="p">,</span> <span class="n">ARRAY1_EXAMPLE_INDEX_BW</span><span class="p">,</span>
+		     <span class="nb">NULL</span><span class="p">);</span>
+  <span class="cm">/* Current maximum is first element of array */</span>
+  <span class="n">max</span> <span class="o">=</span> <span class="n">boolector_read</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+  <span class="cm">/* Symbolic loop unrolling */</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">ARRAY1_EXAMPLE_ARRAY_SIZE</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">read</span> <span class="o">=</span> <span class="n">boolector_read</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+      <span class="n">ugt</span> <span class="o">=</span> <span class="n">boolector_ugt</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">read</span><span class="p">,</span> <span class="n">max</span><span class="p">);</span>
+      <span class="cm">/* found a new maximum? */</span>
+      <span class="n">temp</span> <span class="o">=</span> <span class="n">boolector_cond</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ugt</span><span class="p">,</span> <span class="n">read</span><span class="p">,</span> <span class="n">max</span><span class="p">);</span>
+      <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">max</span><span class="p">);</span>
+      <span class="n">max</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+      <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">read</span><span class="p">);</span>
+      <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ugt</span><span class="p">);</span>
+    <span class="p">}</span>
+
+  <span class="cm">/* Now we show that 'max' is indeed a maximum */</span>
+  <span class="cm">/* We read at an arbitrary position */</span>
+  <span class="n">index</span> <span class="o">=</span> <span class="n">boolector_var</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ARRAY1_EXAMPLE_INDEX_BW</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+  <span class="n">read</span> <span class="o">=</span> <span class="n">boolector_read</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">index</span><span class="p">);</span>
+
+  <span class="cm">/* We assume that it is possible that the read value is greater than 'max' */</span>
+  <span class="n">formula</span> <span class="o">=</span> <span class="n">boolector_ugt</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">read</span><span class="p">,</span> <span class="n">max</span><span class="p">);</span>
+
+  <span class="cm">/* We assert the formula and call Boolector */</span>
+  <span class="n">boolector_assert</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">formula</span><span class="p">);</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">boolector_sat</span> <span class="p">(</span><span class="n">btor</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="n">BOOLECTOR_UNSAT</span><span class="p">)</span>
+    <span class="n">printf</span> <span class="p">(</span><span class="s">"Formula is unsatisfiable</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+  <span class="k">else</span>
+    <span class="n">abort</span> <span class="p">();</span>
+
+  <span class="cm">/* clean up */</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">ARRAY1_EXAMPLE_ARRAY_SIZE</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">formula</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">read</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">index</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">max</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">array</span><span class="p">);</span>
+  <span class="n">assert</span> <span class="p">(</span><span class="n">boolector_get_refs</span> <span class="p">(</span><span class="n">btor</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="n">boolector_delete</span> <span class="p">(</span><span class="n">btor</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-c"><div class="highlight"><pre><span class="cp">#include "boolector.h"</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;assert.h&gt;</span>
+
+<span class="cp">#define ARRAY2_EXAMPLE_VALUE_BW 8</span>
+<span class="cp">#define ARRAY2_EXAMPLE_INDEX_BW 1</span>
+
+<span class="cm">/* We demonstrate Boolector's ability to obtain Array models.</span>
+<span class="cm"> * We check the following formula for satisfiability:</span>
+<span class="cm"> * write (array1, 0, 3) = write (array2, 1, 5)</span>
+<span class="cm"> */</span>
+
+<span class="kt">int</span>
+<span class="nf">main</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">Btor</span> <span class="o">*</span><span class="n">btor</span><span class="p">;</span>
+  <span class="n">BoolectorNode</span> <span class="o">*</span><span class="n">array1</span><span class="p">,</span> <span class="o">*</span><span class="n">array2</span><span class="p">,</span> <span class="o">*</span><span class="n">zero</span><span class="p">,</span> <span class="o">*</span><span class="n">one</span><span class="p">,</span> <span class="o">*</span><span class="n">val1</span><span class="p">,</span> <span class="o">*</span><span class="n">val2</span><span class="p">;</span>
+  <span class="n">BoolectorNode</span> <span class="o">*</span><span class="n">write1</span><span class="p">,</span> <span class="o">*</span><span class="n">write2</span><span class="p">,</span> <span class="o">*</span><span class="n">formula</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="o">**</span><span class="n">indices</span><span class="p">,</span> <span class="o">**</span><span class="n">values</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">result</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">i</span><span class="p">;</span>
+
+  <span class="n">btor</span> <span class="o">=</span> <span class="n">boolector_new</span> <span class="p">();</span>
+  <span class="n">boolector_set_opt</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="s">"model_gen"</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+  <span class="n">zero</span> <span class="o">=</span> <span class="n">boolector_zero</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ARRAY2_EXAMPLE_INDEX_BW</span><span class="p">);</span>
+  <span class="n">one</span> <span class="o">=</span> <span class="n">boolector_one</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ARRAY2_EXAMPLE_INDEX_BW</span><span class="p">);</span>
+  <span class="n">val1</span> <span class="o">=</span> <span class="n">boolector_int</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">ARRAY2_EXAMPLE_VALUE_BW</span><span class="p">);</span>
+  <span class="n">val2</span> <span class="o">=</span> <span class="n">boolector_int</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ARRAY2_EXAMPLE_VALUE_BW</span><span class="p">);</span>
+  <span class="n">array1</span> <span class="o">=</span>
+    <span class="n">boolector_array</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ARRAY2_EXAMPLE_VALUE_BW</span><span class="p">,</span> <span class="n">ARRAY2_EXAMPLE_INDEX_BW</span><span class="p">,</span>
+		     <span class="nb">NULL</span><span class="p">);</span>
+  <span class="n">array2</span> <span class="o">=</span>
+    <span class="n">boolector_array</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ARRAY2_EXAMPLE_VALUE_BW</span><span class="p">,</span> <span class="n">ARRAY2_EXAMPLE_INDEX_BW</span><span class="p">,</span>
+		     <span class="nb">NULL</span><span class="p">);</span>
+  <span class="n">write1</span> <span class="o">=</span> <span class="n">boolector_write</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">array1</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">val1</span><span class="p">);</span>
+  <span class="n">write2</span> <span class="o">=</span> <span class="n">boolector_write</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">array2</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">val2</span><span class="p">);</span>
+  <span class="cm">/* Note: we compare two arrays for equality ---&gt; needs extensional theory */</span>
+  <span class="n">formula</span> <span class="o">=</span> <span class="n">boolector_eq</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">write1</span><span class="p">,</span> <span class="n">write2</span><span class="p">);</span>
+  <span class="n">boolector_assert</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">formula</span><span class="p">);</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">boolector_sat</span> <span class="p">(</span><span class="n">btor</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="n">BOOLECTOR_SAT</span><span class="p">)</span>
+    <span class="n">printf</span> <span class="p">(</span><span class="s">"Formula is satisfiable</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+  <span class="k">else</span>
+    <span class="n">abort</span> <span class="p">();</span>
+
+  <span class="cm">/* Formula is satisfiable, we can obtain array models: */</span>
+  <span class="n">boolector_array_assignment</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">array1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">indices</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">values</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">printf</span> <span class="p">(</span><span class="s">"Array1:</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+      <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+	<span class="n">printf</span> <span class="p">(</span><span class="s">"Array1[%s] = %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+      <span class="n">boolector_free_array_assignment</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+    <span class="p">}</span>
+
+  <span class="n">boolector_array_assignment</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">array2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">indices</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">values</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">printf</span> <span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">Array2:</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+      <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+	<span class="n">printf</span> <span class="p">(</span><span class="s">"Array2[%s] = %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+      <span class="n">boolector_free_array_assignment</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+    <span class="p">}</span>
+
+  <span class="n">boolector_array_assignment</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">write1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">indices</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">values</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">printf</span> <span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">Write1:</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+      <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+	<span class="n">printf</span> <span class="p">(</span><span class="s">"Write1[%s] = %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+      <span class="n">boolector_free_array_assignment</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+    <span class="p">}</span>
+
+  <span class="n">boolector_array_assignment</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">write2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">indices</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">values</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">printf</span> <span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">Write2:</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+      <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+	<span class="n">printf</span> <span class="p">(</span><span class="s">"Write2[%s] = %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+      <span class="n">boolector_free_array_assignment</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+    <span class="p">}</span>
+
+  <span class="cm">/* clean up */</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">formula</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">write1</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">write2</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">array1</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">array2</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">val1</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">val2</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">zero</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">one</span><span class="p">);</span>
+  <span class="n">assert</span> <span class="p">(</span><span class="n">boolector_get_refs</span> <span class="p">(</span><span class="n">btor</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="n">boolector_delete</span> <span class="p">(</span><span class="n">btor</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-c"><div class="highlight"><pre><span class="cp">#include "../../boolector.h"</span>
+<span class="cp">#include &lt;assert.h&gt;</span>
+<span class="cp">#include &lt;limits.h&gt;</span>
+
+<span class="cp">#define ARRAY3_EXAMPLE_VALUE_BW 8</span>
+<span class="cp">#define ARRAY3_EXAMPLE_INDEX_BW 1</span>
+
+<span class="kt">int</span>
+<span class="nf">main</span> <span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">sat_result</span><span class="p">;</span>
+  <span class="n">BoolectorNode</span> <span class="o">*</span><span class="n">array</span><span class="p">,</span> <span class="o">*</span><span class="n">index1</span><span class="p">,</span> <span class="o">*</span><span class="n">index2</span><span class="p">,</span> <span class="o">*</span><span class="n">read1</span><span class="p">,</span> <span class="o">*</span><span class="n">read2</span><span class="p">,</span> <span class="o">*</span><span class="n">eq</span><span class="p">,</span> <span class="o">*</span><span class="n">ne</span><span class="p">;</span>
+  <span class="n">Btor</span> <span class="o">*</span><span class="n">btor</span><span class="p">;</span>
+
+  <span class="n">btor</span> <span class="o">=</span> <span class="n">boolector_new</span> <span class="p">();</span>
+  <span class="n">boolector_set_opt</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="s">"incremental"</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+  <span class="n">array</span> <span class="o">=</span>
+    <span class="n">boolector_array</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ARRAY3_EXAMPLE_VALUE_BW</span><span class="p">,</span> <span class="n">ARRAY3_EXAMPLE_INDEX_BW</span><span class="p">,</span>
+		     <span class="nb">NULL</span><span class="p">);</span>
+  <span class="n">index1</span> <span class="o">=</span> <span class="n">boolector_var</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ARRAY3_EXAMPLE_INDEX_BW</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+  <span class="n">index2</span> <span class="o">=</span> <span class="n">boolector_var</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ARRAY3_EXAMPLE_INDEX_BW</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+  <span class="n">read1</span> <span class="o">=</span> <span class="n">boolector_read</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">index1</span><span class="p">);</span>
+  <span class="n">read2</span> <span class="o">=</span> <span class="n">boolector_read</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">index2</span><span class="p">);</span>
+  <span class="n">eq</span> <span class="o">=</span> <span class="n">boolector_eq</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">index1</span><span class="p">,</span> <span class="n">index2</span><span class="p">);</span>
+  <span class="n">ne</span> <span class="o">=</span> <span class="n">boolector_ne</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">read1</span><span class="p">,</span> <span class="n">read2</span><span class="p">);</span>
+
+  <span class="cm">/* we enforce that index1 is equal to index 2 */</span>
+  <span class="n">boolector_assert</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">eq</span><span class="p">);</span>
+  <span class="n">sat_result</span> <span class="o">=</span> <span class="n">boolector_sat</span> <span class="p">(</span><span class="n">btor</span><span class="p">);</span>
+  <span class="n">assert</span> <span class="p">(</span><span class="n">sat_result</span> <span class="o">==</span> <span class="n">BOOLECTOR_SAT</span><span class="p">);</span>
+  <span class="cm">/* now we additionally assume that the read values differ</span>
+<span class="cm">   * the instance is now unsatasfiable as read congruence is violated */</span>
+  <span class="n">boolector_assume</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ne</span><span class="p">);</span>
+  <span class="n">sat_result</span> <span class="o">=</span> <span class="n">boolector_sat</span> <span class="p">(</span><span class="n">btor</span><span class="p">);</span>
+  <span class="n">assert</span> <span class="p">(</span><span class="n">sat_result</span> <span class="o">==</span> <span class="n">BOOLECTOR_UNSAT</span><span class="p">);</span>
+  <span class="cm">/* after the SAT call the assumptions are gone</span>
+<span class="cm">   * the instance is now satisfiable again */</span>
+  <span class="n">sat_result</span> <span class="o">=</span> <span class="n">boolector_sat</span> <span class="p">(</span><span class="n">btor</span><span class="p">);</span>
+  <span class="n">assert</span> <span class="p">(</span><span class="n">sat_result</span> <span class="o">==</span> <span class="n">BOOLECTOR_SAT</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">array</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">index1</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">index2</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">read1</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">read2</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">eq</span><span class="p">);</span>
+  <span class="n">boolector_release</span> <span class="p">(</span><span class="n">btor</span><span class="p">,</span> <span class="n">ne</span><span class="p">);</span>
+  <span class="n">boolector_delete</span> <span class="p">(</span><span class="n">btor</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="http://fmv.jku.at/boolector/doc/genindex.html" title="General Index">index</a></li>
+        <li class="right">
+          <a href="http://fmv.jku.at/boolector/doc/cboolector_index.html" title="C Interface">next</a> |</li>
+        <li class="right">
+          <a href="http://fmv.jku.at/boolector/doc/index.html" title="Welcome to Boolector’s API documentation!">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="http://fmv.jku.at/boolector/doc/index.html">Boolector 2.2 documentation</a> »</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        © Copyright 2007-2015, Institute for Formal Models and Verification, Johannes Kepler University, Linz, Austria.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  
+</body></html>
